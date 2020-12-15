@@ -31,7 +31,7 @@ with sqlite3.connect("user.db") as db:
     firstname VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, password VARCHAR(20) NOT NULL, email VARCHAR(30), course VARCHAR(20);''')
 
     cursor.execute(
-        """INSERT INTO user (username, firsrname,lastname,password,email,course) VALUE ("test_user", "murtala", "adamu", "password", "masb4real@gmail.com", "Physics") """)
+        """INSERT INTO user (username, firsrname,lastname,password,email,course) VALUE ("test_user", "Rabi", "Mustapha", "password", "rabichubu@gmail.com", "Computer Science") """)
     db.commit()
 
 
