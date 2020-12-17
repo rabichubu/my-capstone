@@ -28,10 +28,10 @@ with sqlite3.connect("user.db") as db:
     cursor = db.cursor()
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS user(userID INTEGER PRIMARY KEY, username VARCHAR(20) NOT NULL,
-    firstname VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, password VARCHAR(20) NOT NULL, email VARCHAR(30), course VARCHAR(20);''')
+    firstname VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, password VARCHAR(20) NOT NULL, age VARCHAR(20) NOT NULL, email VARCHAR(30), course VARCHAR(20);''')
 
     cursor.execute(
-        """INSERT INTO user (username, firsrname,lastname,password,email,course) VALUE ("test_user", "Rabi", "Mustapha", "password", "rabichubu@gmail.com", "Computer Science") """)
+        """INSERT INTO user (username, firsrname,lastname,password,email,course) VALUE ("test_user", "Rabi", "Mustapha", "password", 40,"rabichubu@gmail.com", "Computer Science") """)
     db.commit()
 
 
@@ -57,6 +57,7 @@ with sqlite3.connect("user.db") as db:
         firstName = input("please enter first name:")
         lastName = input("please enter last name:")
         password = input("please enter a Password:")
+        age = input ("please enter your age:")
         password1 = input("please re-enter Password again:")
 
         while password != password1:
@@ -69,12 +70,16 @@ with sqlite3.connect("user.db") as db:
 
         course = input("please your course:")
 
-        insertDate = '''INSECT INTO user(username, firsrname,lastname,password,email,course)VALUE(?,?,?,?,?,?)'''
-        cursor.execute(insertDate, [(username), (firstName), (lastName), (password), (email), (course)])
+        insertData = '''INSECT INTO user(username, firsrname, lastname, password, age, email, course)VALUE(?,?,?,?,?,?)'''
+        cursor.execute(insertData, [(username), (firstName), (lastName), (password), (age),(email), (course)])
+        cursor.execute('''UPDATE user  SET firstName = ? WHERE firstName = ?'''), ("Rabiatu","rabi")
+        cursor.execute('''DELETE FROM user  WHERE age = ?'''), (40)
         db.commit()
-
 
     newUser()
 
+
+
 cursor.execute("SELECT * FROM user;")
+db.closed();
 print(cursor.fetchall())
